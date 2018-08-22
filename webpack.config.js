@@ -1,4 +1,11 @@
 const path = require('path');
+//se encarga de refrescar la pagina automaticamnete
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
+    template: './app/index.html',
+    filename: 'index.html',
+    inject: 'body'
+});
 
 const config = {
     entry: './app/index.jsx',
@@ -7,8 +14,16 @@ const config = {
         filename: 'bundle.js'
     },
     module:{
-
-    }
+        rules:[
+            {
+                test: /.jsx$/,
+                use:{
+                    loader: 'babel-loader'
+                }
+            }
+        ]
+    },
+    plugins:[HtmlWebpackPluginConfig]
 };
 
 module.exports = config;
