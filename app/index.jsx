@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-const App = () => <h1>Blog para React</h1>
+const App = () => <h1>Blog test React</h1>
 
 render(
     <App/>,
