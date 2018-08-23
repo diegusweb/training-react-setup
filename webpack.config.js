@@ -7,6 +7,9 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
     inject: 'body'
 });
 
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ExtractTextPluginConfig = new ExtractTextPlugin('main.css');
+
 const config = {
     entry: './app/index.jsx',
     output:{
@@ -14,16 +17,20 @@ const config = {
         filename: 'bundle.js'
     },
     module:{
-        rules:[
-            {
-                test: /\.jsx$/,
-                use:{
-                    loader: 'babel-loader'
-                }
-            }
+        rules: [
+              {
+                test: /\.js$/,
+                include: __dirname + '/app',
+                loader: 'babel-loader',
+              },
+              {
+                test: /\.scss$/,
+                include: __dirname + '/app',
+                loader: ExtractTextPlugin.extract('css!sass')
+              }
         ]
     },
-    plugins:[HtmlWebpackPluginConfig]
+    plugins: [HtmlWebpackPluginConfig, ExtractTextPluginConfig]
 };
 
 module.exports = config;
