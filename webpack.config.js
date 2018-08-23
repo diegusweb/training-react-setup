@@ -8,7 +8,10 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 });
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const ExtractTextPluginConfig = new ExtractTextPlugin('main.css');
+const ExtractTextPluginConfig = new ExtractTextPlugin({
+    filename: 'main.css',
+    allChunks: true
+});
 
 const config = {
     entry: './app/index.jsx',
@@ -19,15 +22,25 @@ const config = {
     module:{
         rules: [
               {
-                test: /\.js$/,
-                include: __dirname + '/app',
+                test: /\.jsx?$/,
+                exclude: /node_modules/,
                 loader: 'babel-loader',
               },
               {
                 test: /\.scss$/,
-                include: __dirname + '/app',
-                loader: ExtractTextPlugin.extract('css!sass')
-              }
+                use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
+                        use: [
+                            {
+                                loader: "css-loader" // translates CSS into CommonJS
+                            },
+                            {
+                                loader: "sass-loader" // compiles Sass to CSS
+                            }
+                        ],
+                        fallback: "style-loader" // used when css not extracted
+                    }
+                ))
+            },
         ]
     },
     plugins: [HtmlWebpackPluginConfig, ExtractTextPluginConfig]

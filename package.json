@@ -6,7 +6,8 @@
   "scripts": {
     "build": "webpack --mode development",
     "dev": "webpack-dev-server --mode production",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --progress --colors --hot --inline"
   },
   "repository": {
     "type": "git",
@@ -28,12 +29,16 @@
     "babel-loader": "^7.1.5",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "css-hot-loader": "^1.4.2",
     "css-loader": "^1.0.0",
     "extract-text-webpack-plugin": "^3.0.2",
     "html-webpack-plugin": "^3.2.0",
     "node-sass": "^4.9.3",
+    "react-hot-loader": "^4.3.4",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.22.1",
+    "uglifyjs-webpack-plugin": "^1.3.0",
+    "url-loader": "^1.1.1",
     "webpack": "^4.17.0",
     "webpack-dev-server": "^3.1.5"
   },
