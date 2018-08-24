@@ -4,14 +4,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
     template: './app/index.html',
     filename: 'index.html',
-    inject: 'body'
 });
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const ExtractTextPluginConfig = new ExtractTextPlugin({
-    filename: 'main.css',
-    allChunks: true
-});
+const ExtractTextPluginConfig = new ExtractTextPlugin('main.css');
 
 const config = {
     entry: './app/index.jsx',
@@ -20,27 +16,24 @@ const config = {
         filename: 'bundle.js'
     },
     module:{
-        rules: [
-              {
-                test: /\.jsx?$/,
-                exclude: /node_modules/,
-                loader: 'babel-loader',
-              },
-              {
-                test: /\.scss$/,
-                use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
-                        use: [
-                            {
-                                loader: "css-loader" // translates CSS into CommonJS
-                            },
-                            {
-                                loader: "sass-loader" // compiles Sass to CSS
-                            }
-                        ],
-                        fallback: "style-loader" // used when css not extracted
-                    }
-                ))
+        rules:[
+            {
+                 test: /\.js$/,
+                 exclude: /node_modules/,
+                 use:[
+                     {
+                         loader: 'babel-loader',
+                     }
+                 ]
             },
+            {
+                test: /\.scss$/,
+                exclude: /node_modules/,
+                use: ExtractTextPlugin.extract({
+                     fallback: "style-loader",
+                     use: "css-loader!sass-loader",
+                })
+            }
         ]
     },
     plugins: [HtmlWebpackPluginConfig, ExtractTextPluginConfig]

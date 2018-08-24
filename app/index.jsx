@@ -1,11 +1,16 @@
 import React from 'react';
 import { render } from 'react-dom';
-//import TestMessage from './components/TestMessage';
-import style from '../styles/main.scss';
 
-const App = () => <h1>Blog test React</h1>
+import './main.scss';
 
-render(
-    <App/>,
-    document.getElementById('app')
-)
+const App = () => {
+  return (
+    <div>
+      <h3>Our Application Is Alive</h3>
+      <p>This isn’t reality. This — is fantasy.</p>
+      <p>Yes am quoting Star Trek, can't help it</p>
+    </div>
+  );
+}
+
+render(<App />, document.getElementById('app'));
