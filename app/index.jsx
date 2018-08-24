@@ -1,10 +1,15 @@
 import React from 'react';
 import { render } from 'react-dom';
-//import TestMessage from './components/TestMessage';
 
-const App = () => <h1>Blog test React</h1>
+import './main.scss';
 
-render(
-    <App/>,
-    document.getElementById('app')
-)
+const App = () => {
+  return (
+    <div>
+      <h3>Training React 2018</h3>
+      <p>This page is a demo.</p>
+    </div>
+  );
+}
+
+render(<App />, document.getElementById('app'));

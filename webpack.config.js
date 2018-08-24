@@ -4,8 +4,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
     template: './app/index.html',
     filename: 'index.html',
-    inject: 'body'
 });
+
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ExtractTextPluginConfig = new ExtractTextPlugin('main.css');
 
 const config = {
     entry: './app/index.jsx',
@@ -16,14 +18,25 @@ const config = {
     module:{
         rules:[
             {
-                test: /\.jsx$/,
-                use:{
-                    loader: 'babel-loader'
-                }
+                 test: /\.jsx$/,
+                 exclude: /node_modules/,
+                 use:[
+                     {
+                         loader: 'babel-loader',
+                     }
+                 ]
+            },
+            {
+                test: /\.scss$/,
+                exclude: /node_modules/,
+                use: ExtractTextPlugin.extract({
+                     fallback: "style-loader",
+                     use: "css-loader!sass-loader",
+                })
             }
         ]
     },
-    plugins:[HtmlWebpackPluginConfig]
+    plugins: [HtmlWebpackPluginConfig, ExtractTextPluginConfig]
 };
 
 module.exports = config;
