@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prod": "webpack --mode production",
-    "dev": "webpack-dev-server --mode development"
+    "dev": "webpack-dev-server --mode development",
+    "test:jest": "jest"
   },
   "repository": {
     "type": "git",
@@ -25,14 +26,20 @@
   "homepage": "https://github.com/diegusweb/training-react-setup#readme",
   "devDependencies": {
     "babel-core": "^6.26.3",
+    "babel-jest": "^23.4.2",
     "babel-loader": "^7.1.5",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "css-hot-loader": "^1.4.2",
     "css-loader": "^1.0.0",
+    "enzyme": "^3.4.4",
+    "enzyme-adapter-react-16": "^1.3.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "html-webpack-plugin": "^3.2.0",
+    "jest": "^23.5.0",
     "node-sass": "^4.9.3",
+    "react-addons-test-utils": "^15.6.2",
     "react-hot-loader": "^4.3.4",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.22.1",
