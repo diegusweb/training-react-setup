@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 //se encarga de refrescar la pagina automaticamnete
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
@@ -10,10 +11,25 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ExtractTextPluginConfig = new ExtractTextPlugin('main.css');
 
 const config = {
-    entry: './app/index.jsx',
+    entry: [
+        'react-hot-loader/patch',
+        'webpack-dev-server/client?http://localhost:8080',
+        'webpack/hot/only-dev-server',
+        './app/index.jsx'
+    ],
     output:{
         path: path.resolve('dist'),
-        filename: 'bundle.js'
+        filename: 'bundle.js',
+        publicPath: '/'
+        //necessary for HMR to know where to load the hot update chunks
+    },
+    devServer:{
+        hot: true,
+       //activate hot reloading
+       contentBase: '/dist',
+       //match the output path
+       publicPath: '/'
+       //match the output publicPath
     },
     module:{
         rules:[
@@ -36,7 +52,14 @@ const config = {
             }
         ]
     },
-    plugins: [HtmlWebpackPluginConfig, ExtractTextPluginConfig]
+    plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+      //activates HMR
+      new webpack.NamedModulesPlugin(),
+      //prints more readable module names in the browser console on HMR updates
+      HtmlWebpackPluginConfig,
+      ExtractTextPluginConfig
+  ]
 };
 
 module.exports = config;
