@@ -5,7 +5,7 @@ export default class Welcome extends React.Component {
         return (
           <div>
             <h3>Training React 2018</h3>
-            <p>This page is a demo.</p>
+            <p>This page is a demo..</p>
           </div>
         );
     }
